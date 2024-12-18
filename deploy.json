@@ -2,37 +2,37 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "resources": [
-      {
-        "type": "Microsoft.Web/sites",
-        "apiVersion": "2021-02-01",
-        "name": "[parameters('webAppName')]",
-        "location": "[resourceGroup().location]",
-        "properties": {
-          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-        }
-      },
-      {
-        "type": "Microsoft.Web/serverfarms",
-        "apiVersion": "2021-02-01",
-        "name": "[parameters('hostingPlanName')]",
-        "location": "[resourceGroup().location]",
-        "sku": {
-          "name": "F1",
-          "tier": "Free"
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('hostingPlanName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "tier": "Free"
+            },
+            "properties": {
+                "reserved": false
+            }
         },
-        "properties": {
-          "reserved": false
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('webAppName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+            }
         }
-      }
     ],
     "parameters": {
-      "webAppName": {
-        "type": "string",
-        "defaultValue": "myMvcApp"
-      },
-      "hostingPlanName": {
-        "type": "string",
-        "defaultValue": "myMvcAppPlan"
-      }
+        "webAppName": {
+            "type": "string",
+            "defaultValue": "myUniqueMvcApp"
+        },
+        "hostingPlanName": {
+            "type": "string",
+            "defaultValue": "myMvcAppPlan"
+        }
     }
-  }
+}
